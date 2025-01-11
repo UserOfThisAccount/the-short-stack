@@ -1,13 +1,11 @@
-// script.js
-
 const searchInput = document.getElementById("searchInput");
 const searchButton = document.getElementById("searchButton");
 const resultsContainer = document.getElementById("results");
 
-// Base API URL
+
 const API_BASE = "https://openlibrary.org";
 
-// Fetch and display books when search button is clicked
+// is button clicked? -> search and display books
 searchButton.addEventListener("click", async () => {
     const query = searchInput.value.trim();
     if (!query) {
@@ -16,7 +14,7 @@ searchButton.addEventListener("click", async () => {
     }
 
     try {
-        // Fetch data from API
+        // fetching data from API
         const response = await fetch(
             `${API_BASE}/search.json?q=${encodeURIComponent(query)}`
         );
@@ -25,7 +23,7 @@ searchButton.addEventListener("click", async () => {
         }
         const data = await response.json();
 
-        // Display results
+        
         displayBooks(data.docs);
     } catch (error) {
         console.error("Error fetching data:", error);
@@ -34,9 +32,9 @@ searchButton.addEventListener("click", async () => {
     }
 });
 
-// Function to display books
+
 function displayBooks(books) {
-    resultsContainer.innerHTML = ""; // Clear previous results
+    resultsContainer.innerHTML = ""; // previous result clearing
 
     if (!books || books.length === 0) {
         resultsContainer.innerHTML =
